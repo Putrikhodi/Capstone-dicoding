@@ -1,0 +1,773 @@
+/* Base Styles */
+:root {
+    --primary: #5BEBA9;
+    --primary-dark: #2ECB8E;
+    --secondary: #96DCEE;
+    --text: #333333;
+    --text-light: #666666;
+    --text-lighter: #999999;
+    --border: #E5E7EB;
+    --background: #F9FAFB;
+    --white: #FFFFFF;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --radius-sm: 0.375rem;
+    --radius: 0.5rem;
+    --radius-lg: 0.75rem;
+    --transition: all 0.2s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: var(--text);
+    line-height: 1.5;
+    background-color: var(--background);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button, input, textarea {
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+img {
+    /* Set maximum width and height for images */
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Layout */
+.container {
+    /* Define a container element with a minimum height and display flex */
+    display: flex;
+    min-height: calc(100vh - 80px); /* Account for navbar height */
+}
+
+/* Navigation */
+.navbar {
+    /* Define styles for the navbar element */
+    background: var(--white);
+    box-shadow: var(--shadow-sm);
+    height: 80px;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 50;
+}
+
+.nav-container {
+    /* Define a container element for the navbar */
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    /* Define styles for the logo element */
+    display: block;
+}
+
+.logo img {
+    /* Set height and width for the logo image */
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-links {
+    /* Define styles for the navigation links */
+    display: flex;
+    gap: 2rem;
+    margin-left: 3rem;
+}
+
+.nav-link {
+    /* Define styles for individual navigation links */
+    color: var(--text-light);
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.nav-link:hover {
+    /* Define hover styles for navigation links */
+    color: var(--text);
+}
+
+.nav-link::after {
+    /* Define a pseudo-element for navigation links */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transition: var(--transition);
+}
+
+.nav-link:hover::after {
+    /* Define hover styles for the pseudo-element */
+    width: 100%;
+}
+
+.nav-buttons {
+    /* Define styles for the navigation buttons */
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    /* Define styles for buttons */
+    padding: 0.625rem 1.25rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.btn-outline {
+    /* Define styles for outline buttons */
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text);
+}
+
+.btn-outline:hover {
+    /* Define hover styles for outline buttons */
+    background: var(--background);
+    border-color: var(--text-lighter);
+}
+
+.btn-primary {
+    /* Define styles for primary buttons */
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    box-shadow: var(--shadow);
+}
+
+.btn-primary:hover {
+    /* Define hover styles for primary buttons */
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.mobile-menu-btn {
+    /* Define styles for the mobile menu button */
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text);
+    cursor: pointer;
+}
+
+/* Illustration Side */
+.illustration-side {
+    /* Define styles for the illustration side element */
+    flex: 0 0 50%;
+    max-width: 50%;
+    background: url('images/codioful-formerly-gradienta-UF_wwDxI6uk-unsplash.jpg') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 3rem;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Right Side Illustration */
+.illustration-side.right {
+    background: linear-gradient(135deg, #5BEBA9 0%, #96DCEE 100%);
+    padding: 2rem;
+}
+
+.illustration-side.right .illustration-image {
+    max-height: 90%;
+    max-width: 90%;
+    object-fit: contain;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.illustration-side.right::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('images/width_1600.png') no-repeat center center;
+    background-size: contain;
+    opacity: 0.9;
+    z-index: 1;
+}
+
+.illustration-image {
+    /* Define styles for the illustration image */
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: calc(100vh - 8rem);
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    margin: 0 auto;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+    transition: filter 0.3s ease;
+}
+
+.illustration-image:hover {
+    /* Define hover styles for the illustration image */
+    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.25));
+}
+
+/* 
+ * ======================
+ * FORM SIDE
+ * ======================
+ * Styles for the right side form container that appears on both
+ * login and register pages. Contains the form elements and submission buttons.
+ */
+.form-side {
+    /* Define styles for the form side element */
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    background: var(--white);
+}
+
+.form-container {
+    /* Define styles for the form container element */
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-container h1 {
+    /* Define styles for the form title */
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--text);
+}
+
+/* Form Styles */
+.form-group {
+    /* Define styles for form groups */
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    /* Define styles for form labels */
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text);
+    font-size: 0.9375rem;
+}
+
+.form-group input {
+    /* Define styles for form inputs */
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.9375rem;
+    transition: var(--transition);
+    background-color: var(--background);
+}
+
+.form-group input:focus {
+    /* Define focus styles for form inputs */
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(91, 235, 169, 0.2);
+}
+
+.password-input {
+    /* Define styles for password inputs */
+    position: relative;
+}
+
+.toggle-password {
+    /* Define styles for the toggle password button */
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-lighter);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.toggle-password:hover {
+    /* Define hover styles for the toggle password button */
+    color: var(--text);
+}
+
+.form-options {
+    /* Form Options */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 1.5rem 0;
+    font-size: 0.875rem;
+}
+
+.form-options-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-options .signup-link {
+    text-align: left;
+    margin: 0;
+    font-size: 0.875rem;
+}
+
+.form-options .signup-link a {
+    margin-left: 0.25rem;
+}
+
+.remember-me {
+    /* Define styles for the remember me checkbox */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text);
+    cursor: pointer;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.remember-me input[type="checkbox"] {
+    /* Define styles for the remember me checkbox input */
+    width: 1.125rem;
+    height: 1.125rem;
+    border: 1px solid var(--border);
+    border-radius: 0.25rem;
+    appearance: none;
+    margin: 0;
+    cursor: pointer;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    flex-shrink: 0;
+}
+
+.remember-me input[type="checkbox"]:checked {
+    /* Define checked styles for the remember me checkbox input */
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-color: transparent;
+}
+
+.remember-me input[type="checkbox"]::after {
+    /* Define a pseudo-element for the remember me checkbox input */
+    content: '✓';
+    color: white;
+    font-size: 0.75rem;
+    display: none;
+    line-height: 1;
+}
+
+.remember-me input[type="checkbox"]:checked::after {
+    /* Define checked styles for the pseudo-element */
+    display: block;
+}
+
+.forgot-password {
+    /* Define styles for the forgot password link */
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.forgot-password:hover {
+    /* Define hover styles for the forgot password link */
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+.forgot-password:hover {
+    /* Define hover styles for the forgot password link */
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+.btn-signin {
+    /* Define styles for the sign in button */
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.signup-link {
+    /* Define styles for the sign up link */
+    text-align: center;
+    color: var(--text-light);
+    font-size: 0.9375rem;
+}
+
+.signup-link a {
+    /* Define styles for the sign up link anchor */
+    color: var(--primary);
+    font-weight: 600;
+    margin-left: 0.25rem;
+    transition: var(--transition);
+}
+
+.signup-link a:hover {
+    /* Define hover styles for the sign up link anchor */
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* Form Row Layout */
+.form-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+/* Form Controls */
+.form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    background-color: #fff;
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(91, 235, 169, 0.25);
+}
+
+/* Password Input Wrapper */
+.password-input {
+    position: relative;
+}
+
+.password-input input {
+    padding-right: 2.5rem;
+}
+
+.password-input .toggle-password {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-lighter);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.password-input .toggle-password:hover {
+    color: var(--text);
+}
+
+/* Helper Text */
+.helper-text {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.8125rem;
+    color: var(--text-lighter);
+    line-height: 1.4;
+}
+
+/* Terms and Privacy Links */
+.terms-link,
+.privacy-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.terms-link:hover,
+.privacy-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* Form Options */
+.form-options {
+    margin: 1.5rem 0;
+}
+
+.remember-me {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.9375rem;
+    color: var(--text-light);
+    cursor: pointer;
+}
+
+.remember-me input[type="checkbox"] {
+    margin-top: 0.2em;
+    cursor: pointer;
+}
+
+/* Sign In Button */
+.btn-signin {
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Sign Up Link */
+.signup-link {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 0.9375rem;
+}
+
+.signup-link a {
+    color: var(--primary);
+    font-weight: 600;
+    margin-left: 0.25rem;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.signup-link a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* 
+ * ======================
+ * FOOTER
+ * ======================
+ * Footer styles including logo, navigation links, and social media icons.
+ * Responsive grid layout for different screen sizes.
+ */
+.footer {
+    /* Define styles for the footer element */
+    background-color: #1F2937;
+    color: #F3F4F6;
+    padding: 4rem 2rem 2rem;
+}
+
+.footer-container {
+    /* Define styles for the footer container element */
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-about {
+    /* Define styles for the footer about section */
+    max-width: 320px;
+}
+
+.footer-logo {
+    /* Define styles for the footer logo */
+    margin-bottom: 1.25rem;
+}
+
+.footer-logo img {
+    /* Define styles for the footer logo image */
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+}
+
+.footer-description {
+    /* Define styles for the footer description */
+    color: #9CA3AF;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.social-icons {
+    /* Define styles for the social media icons */
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icon {
+    /* Define styles for individual social media icons */
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #374151;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #F3F4F6;
+    transition: var(--transition);
+}
+
+.social-icon:hover {
+    /* Define hover styles for social media icons */
+    background-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.footer-links h3,
+.footer-contact h3 {
+    /* Define styles for footer link and contact headings */
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+.footer-links ul {
+    /* Define styles for footer link lists */
+    list-style: none;
+}
+
+.footer-links li {
+    /* Define styles for individual footer link list items */
+    margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+    /* Define styles for footer link anchors */
+    color: #9CA3AF;
+    transition: var(--transition);
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    /* Define hover styles for footer link anchors */
+    color: var(--primary);
+    transform: translateX(4px);
+}
+
+.footer-contact p {
+    /* Define styles for footer contact paragraphs */
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #9CA3AF;
+    margin-bottom: 1rem;
+}
+
+.footer-contact i {
+    /* Define styles for footer contact icons */
+    color: var(--primary);
+    width: 20px;
+    text-align: center;
+}
+
+.footer-bottom {
+    /* Define styles for the footer bottom section */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 2rem;
+    border-top: 1px solid #374151;
+    text-align: center;
+    color: #9CA3AF;
+    font-size: 0.875rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    /* Define styles for screens with a maximum width of 1024px */
+    .form-row {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .form-row .form-group {
+        width: 100%;
+    }
+    .nav-links {
+        display: none;
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .container {
+        flex-direction: column;
+        min-height: auto;
+    }
+    
+    .illustration-side {
+        display: none;
+    }
+    
+    .form-side {
+        padding: 2rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-buttons {
+        display: none;
+    }
+    
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .forgot-password {
+        margin-left: 0;
+        margin-top: 1rem;
+    }
+}
