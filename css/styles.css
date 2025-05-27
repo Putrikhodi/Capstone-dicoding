@@ -1,3 +1,7 @@
+/* Import other CSS files */
+@import url('navbar.css');
+@import url('footer.css');
+
 /* Base Styles */
 :root {
     --primary: #5BEBA9;
@@ -36,6 +40,9 @@ body {
     background-color: var(--background);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 a {
@@ -49,100 +56,30 @@ button, input, textarea {
 }
 
 img {
-    /* Set maximum width and height for images */
     max-width: 100%;
     height: auto;
     display: block;
 }
 
-/* Layout */
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 2rem 0;
+}
+
 .container {
-    /* Define a container element with a minimum height and display flex */
-    display: flex;
-    min-height: calc(100vh - 80px); /* Account for navbar height */
-}
-
-/* Navigation */
-.navbar {
-    /* Define styles for the navbar element */
-    background: var(--white);
-    box-shadow: var(--shadow-sm);
-    height: 80px;
-    display: flex;
-    align-items: center;
-    padding: 0 2rem;
-    position: relative;
-    z-index: 50;
-}
-
-.nav-container {
-    /* Define a container element for the navbar */
     width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 0;
+    align-items: stretch;
+    min-height: 100vh;
 }
 
-.logo {
-    /* Define styles for the logo element */
-    display: block;
-}
-
-.logo img {
-    /* Set height and width for the logo image */
-    height: 40px;
-    width: auto;
-    object-fit: contain;
-}
-
-.nav-links {
-    /* Define styles for the navigation links */
-    display: flex;
-    gap: 2rem;
-    margin-left: 3rem;
-}
-
-.nav-link {
-    /* Define styles for individual navigation links */
-    color: var(--text-light);
-    font-weight: 500;
-    transition: var(--transition);
-    position: relative;
-    padding: 0.5rem 0;
-}
-
-.nav-link:hover {
-    /* Define hover styles for navigation links */
-    color: var(--text);
-}
-
-.nav-link::after {
-    /* Define a pseudo-element for navigation links */
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
-    transition: var(--transition);
-}
-
-.nav-link:hover::after {
-    /* Define hover styles for the pseudo-element */
-    width: 100%;
-}
-
-.nav-buttons {
-    /* Define styles for the navigation buttons */
-    display: flex;
-    gap: 1rem;
-}
-
+/* Buttons */
 .btn {
-    /* Define styles for buttons */
     padding: 0.625rem 1.25rem;
     border-radius: var(--radius);
     font-weight: 600;
@@ -156,20 +93,17 @@ img {
 }
 
 .btn-outline {
-    /* Define styles for outline buttons */
     border: 1px solid var(--border);
     background: transparent;
     color: var(--text);
 }
 
 .btn-outline:hover {
-    /* Define hover styles for outline buttons */
     background: var(--background);
     border-color: var(--text-lighter);
 }
 
 .btn-primary {
-    /* Define styles for primary buttons */
     background: linear-gradient(90deg, var(--primary), var(--secondary));
     color: white;
     border: none;
@@ -177,82 +111,123 @@ img {
 }
 
 .btn-primary:hover {
-    /* Define hover styles for primary buttons */
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }
 
-.mobile-menu-btn {
-    /* Define styles for the mobile menu button */
-    display: none;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: var(--text);
-    cursor: pointer;
+/* Utility Classes */
+.text-center {
+    text-align: center;
 }
 
-/* Illustration Side */
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
+.mt-5 { margin-top: 3rem; }
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+.mb-5 { margin-bottom: 3rem; }
+
+/* Illustration Section */
 .illustration-side {
-    /* Define styles for the illustration side element */
-    flex: 0 0 50%;
-    max-width: 50%;
-    background: url('images/codioful-formerly-gradienta-UF_wwDxI6uk-unsplash.jpg') no-repeat center center;
-    background-size: cover;
-    background-attachment: fixed;
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4rem 3rem;
     position: relative;
     overflow: hidden;
-    box-sizing: border-box;
+    min-height: 100vh;
+    width: 50%;
+    background: url('../images/codioful-formerly-gradienta-UF_wwDxI6uk-unsplash.jpg') no-repeat center center;
+    background-size: cover;
+    transition: all 0.3s ease;
 }
 
 /* Right Side Illustration */
 .illustration-side.right {
     background: linear-gradient(135deg, #5BEBA9 0%, #96DCEE 100%);
     padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.illustration-side.right .illustration-image {
-    max-height: 90%;
-    max-width: 90%;
-    object-fit: contain;
-    border-radius: 1rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.illustration-side.right::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('images/width_1600.png') no-repeat center center;
-    background-size: contain;
-    opacity: 0.9;
-    z-index: 1;
+.illustration-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .illustration-image {
-    /* Define styles for the illustration image */
     width: 100%;
-    max-width: 100%;
+    max-width: 400px;
     height: auto;
-    max-height: calc(100vh - 8rem);
     object-fit: contain;
     object-position: center;
     display: block;
     margin: 0 auto;
     filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
-    transition: filter 0.3s ease;
+    transition: all 0.3s ease;
+    transform: scale(1);
 }
 
 .illustration-image:hover {
-    /* Define hover styles for the illustration image */
+    transform: scale(1.03);
     filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.25));
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .illustration-image {
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    .illustration-side {
+        width: 100%;
+        min-height: 40vh;
+    }
+    
+    .illustration-side.right {
+        order: -1;
+        min-height: 300px;
+    }
+    
+    .illustration-image {
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .illustration-image {
+        max-width: 250px;
+    }
+    
+    .form-side {
+        padding: 2rem 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .illustration-image {
+        max-width: 200px;
+    }
+    
+    .form-side {
+        padding: 1.5rem 1rem;
+    }
 }
 
 /* 
@@ -263,19 +238,20 @@ img {
  * login and register pages. Contains the form elements and submission buttons.
  */
 .form-side {
-    /* Define styles for the form side element */
     flex: 1;
+    max-width: 900px;
+    background: var(--white);
+    padding: 4rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4rem 2rem;
-    background: var(--white);
+    box-shadow: var(--shadow);
 }
 
 .form-container {
     /* Define styles for the form container element */
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
 }
 
 .form-container h1 {
