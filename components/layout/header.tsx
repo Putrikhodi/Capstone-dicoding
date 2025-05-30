@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Header() {
   return (
-    <header className="bg-white shadow-2xl relative z-10">
+    <header className="bg-white shadow-xl relative z-10">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <Image
