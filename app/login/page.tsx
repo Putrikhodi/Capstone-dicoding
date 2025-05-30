@@ -1,31 +1,27 @@
-"use client"
+"use client";
 
-import Header from "@/components/layout/header"
-import Footer from "@/components/layout/footer"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Eye, EyeOff } from "lucide-react"
-import Link from "next/link"
-import Image from "next/image"
-import { useState } from "react"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Eye, EyeOff } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { useState } from "react";
 
 export default function LoginPage() {
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
-
       <div className="grid lg:grid-cols-2 min-h-[calc(100vh-80px)]">
         {/* Left side - Illustration */}
         <div className="hidden lg:block bg-gradient-to-br from-purple-200 via-green-200 to-cyan-300 relative overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-full h-full relative">
               <div className="w-full h-full flex items-center justify-center">
-                <Image 
-                  src="/images/width_1440.png" 
+                <Image
+                  src="/images/width_1440.png"
                   alt="Mother and child illustration"
                   width={500}
                   height={500}
@@ -61,7 +57,10 @@ export default function LoginPage() {
                   <Label htmlFor="password" className="text-gray-700">
                     Password
                   </Label>
-                  <Link href="/forgot-password" className="text-sm text-cyan-500 hover:text-cyan-600">
+                  <Link
+                    href="/forgot-password"
+                    className="text-sm text-cyan-500 hover:text-cyan-600"
+                  >
                     Forget Password ?
                   </Link>
                 </div>
@@ -84,14 +83,18 @@ export default function LoginPage() {
                   </button>
                 </div>
                 <p className="text-xs text-gray-500 mt-1">
-                  Use 8 or more characters with a mix of letters, numbers & symbols
+                  Use 8 or more characters with a mix of letters, numbers &
+                  symbols
                 </p>
               </div>
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                   <Checkbox id="remember" />
-                  <Label htmlFor="remember" className="ml-2 text-sm text-gray-700">
+                  <Label
+                    htmlFor="remember"
+                    className="ml-2 text-sm text-gray-700"
+                  >
                     Remember me
                   </Label>
                 </div>
@@ -103,7 +106,10 @@ export default function LoginPage() {
 
               <p className="text-center text-sm text-gray-600">
                 Don't have an account?{" "}
-                <Link href="/register" className="text-cyan-500 hover:text-cyan-600 underline">
+                <Link
+                  href="/register"
+                  className="text-cyan-500 hover:text-cyan-600 underline"
+                >
                   Sign up
                 </Link>
               </p>
@@ -111,8 +117,6 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
-
-      <Footer />
     </div>
-  )
+  );
 }

@@ -1,0 +1,25 @@
+[data-aos="slide-in-left"] {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition-property: transform, opacity;
+  transition-timing-function: ease-out;
+  transition-duration: 0.5s;
+}
+
+[data-aos="slide-in-left"].aos-animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+[data-aos="slide-in-right"] {
+  opacity: 0;
+  transform: translateX(100%);
+  transition-property: transform, opacity;
+  transition-timing-function: ease-out;
+  transition-duration: 0.5s;
+}
+
+[data-aos="slide-in-right"].aos-animate {
+  opacity: 1;
+  transform: translateX(0);
+}

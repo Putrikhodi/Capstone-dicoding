@@ -1,13 +1,22 @@
-import './globals.css'
+import "./globals.css";
+import "./aos.css";
+import Footer from "@/components/layout/footer";
+import Header from "@/components/layout/header";
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="overflow-x-hidden">
+        <Header />
+
+        {children}
+
+        <Footer />
+      </body>
     </html>
-  )
+  );
 }

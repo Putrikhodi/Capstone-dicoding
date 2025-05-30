@@ -1,24 +1,20 @@
-"use client"
+"use client";
 
-import Header from "@/components/layout/header"
-import Footer from "@/components/layout/footer"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Eye, EyeOff } from "lucide-react"
-import Link from "next/link"
-import Image from "next/image"
-import { useState } from "react"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Eye, EyeOff } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { useState } from "react";
 
 export default function RegisterPage() {
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
-
       <div className="grid lg:grid-cols-2 min-h-[calc(100vh-80px)]">
         {/* Left side - Form */}
         <div className="flex items-center justify-center p-8">
@@ -95,7 +91,8 @@ export default function RegisterPage() {
                   </button>
                 </div>
                 <p className="text-xs text-gray-500 mt-1">
-                  Use 8 or more characters with a mix of letters, numbers & symbols
+                  Use 8 or more characters with a mix of letters, numbers &
+                  symbols
                 </p>
               </div>
 
@@ -122,7 +119,8 @@ export default function RegisterPage() {
                   </button>
                 </div>
                 <p className="text-xs text-gray-500 mt-1">
-                  Use 8 or more characters with a mix of letters, numbers & symbols
+                  Use 8 or more characters with a mix of letters, numbers &
+                  symbols
                 </p>
               </div>
 
@@ -130,11 +128,17 @@ export default function RegisterPage() {
                 <Checkbox id="terms" />
                 <Label htmlFor="terms" className="ml-2 text-sm text-gray-700">
                   Agree to our{" "}
-                  <Link href="/terms" className="text-cyan-500 hover:text-cyan-600 underline">
+                  <Link
+                    href="/terms"
+                    className="text-cyan-500 hover:text-cyan-600 underline"
+                  >
                     Terms of use
                   </Link>{" "}
                   and{" "}
-                  <Link href="/privacy" className="text-cyan-500 hover:text-cyan-600 underline">
+                  <Link
+                    href="/privacy"
+                    className="text-cyan-500 hover:text-cyan-600 underline"
+                  >
                     Privacy Policy
                   </Link>
                 </Label>
@@ -146,7 +150,10 @@ export default function RegisterPage() {
 
               <p className="text-center text-sm text-gray-600">
                 Already have an account?{" "}
-                <Link href="/login" className="text-cyan-500 hover:text-cyan-600 underline">
+                <Link
+                  href="/login"
+                  className="text-cyan-500 hover:text-cyan-600 underline"
+                >
                   Log in
                 </Link>
               </p>
@@ -158,8 +165,8 @@ export default function RegisterPage() {
         <div className="hidden lg:block bg-gradient-to-br from-purple-200 via-green-200 to-cyan-300 relative overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-center p-8">
             <div className="w-full h-full relative">
-              <Image 
-                src="/images/width_1600.png" 
+              <Image
+                src="/images/width_1600.png"
                 alt="Illustration"
                 width={600}
                 height={600}
@@ -170,8 +177,6 @@ export default function RegisterPage() {
           </div>
         </div>
       </div>
-
-      <Footer />
     </div>
-  )
+  );
 }

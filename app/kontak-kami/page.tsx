@@ -1,25 +1,26 @@
-import Header from "@/components/layout/header"
-import Footer from "@/components/layout/footer"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 export default function KontakKamiPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-50 to-blue-50">
-      <Header />
-
       <div className="container mx-auto px-4 py-16">
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">Kontak</span>{" "}
-            <span className="bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent">Kami</span>
+            <span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">
+              Kontak
+            </span>{" "}
+            <span className="bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent">
+              Kami
+            </span>
           </h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Punya pertanyaan atau ingin berkonsultasi? Jangan ragu untuk menghubungi kami
+            Punya pertanyaan atau ingin berkonsultasi? Jangan ragu untuk
+            menghubungi kami
           </p>
         </div>
 
@@ -27,7 +28,9 @@ export default function KontakKamiPage() {
         <Card className="max-w-2xl mx-auto bg-white shadow-xl">
           <CardHeader className="text-center pb-6">
             <h2 className="text-2xl font-bold">Bantuan</h2>
-            <p className="text-gray-600">Isi formulir berikut untuk mengirim pesan kepada tim NutriEdu</p>
+            <p className="text-gray-600">
+              Isi formulir berikut untuk mengirim pesan kepada tim NutriEdu
+            </p>
           </CardHeader>
 
           <CardContent className="p-8">
@@ -69,8 +72,6 @@ export default function KontakKamiPage() {
           </CardContent>
         </Card>
       </div>
-
-      <Footer />
     </div>
-  )
+  );
 }
