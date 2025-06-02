@@ -10,8 +10,8 @@ export default function KontakKamiPage() {
       <div className="container mx-auto px-4 py-16">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold mb-4 ">
+            <span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-black">
               Kontak
             </span>{" "}
             <span className="bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent">
@@ -65,7 +65,7 @@ export default function KontakKamiPage() {
                 />
               </div>
 
-              <Button className="w-full bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white py-3 text-lg">
+              <Button className="w-full bg-gradient-to-r from-cyan-400 to-green-400 hover:from-cyan-500 rounded-md hover:to-green-500 text-white py-3 text-lg">
                 Kirim Pesan
               </Button>
             </form>
