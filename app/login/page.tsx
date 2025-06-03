@@ -14,10 +14,10 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="grid lg:grid-cols-2 min-h-[calc(100vh-80px)]">
+      <div className="grid lg:grid-cols-2 min-h-[calc(100vh-0px)]">
         {/* Left side - Illustration */}
         <div className="hidden lg:block bg-gradient-to-br from-purple-200 via-green-200 to-cyan-300 relative overflow-hidden">
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center p-8">
             <div className="w-full h-full relative">
               <div className="w-full h-full flex items-center justify-center">
                 <Image
@@ -59,7 +59,8 @@ export default function LoginPage() {
                   </Label>
                   <Link
                     href="/forgot-password"
-                    className="text-sm text-cyan-500 hover:text-cyan-600"
+                    className="underline transition-colors duration-200 hover:bg-[#FFFFFF] hover:opacity-90 px-1"
+                    style={{ color: '#00FC93' }}
                   >
                     Forget Password ?
                   </Link>
@@ -100,7 +101,7 @@ export default function LoginPage() {
                 </div>
               </div>
 
-              <Button className="w-full bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white py-3">
+              <Button className="w-full bg-gradient-to-r from-cyan-400 to-green-400 hover:from-cyan-500 rounded-md hover:to-green-500 text-white py-3 text-lg">
                 Sign in
               </Button>
 
@@ -108,7 +109,8 @@ export default function LoginPage() {
                 Don't have an account?{" "}
                 <Link
                   href="/register"
-                  className="text-cyan-500 hover:text-cyan-600 underline"
+                  className="underline transition-colors duration-200 hover:bg-[#FFFFFF] hover:opacity-90 px-1"
+                  style={{ color: '#00FC93' }}
                 >
                   Sign up
                 </Link>

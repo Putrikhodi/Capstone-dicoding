@@ -8,7 +8,6 @@ import AOS from "aos";
 import { useEffect } from "react";
 
 export default function TentangKamiPage() {
-  let baseDuration = 200;
   useEffect(() => {
     AOS.init({
       duration: 600, // durasi animasi
@@ -17,7 +16,7 @@ export default function TentangKamiPage() {
     });
   }, []);
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 to-blue-50 overflow-hidden">
       <div className="container mx-auto px-4 py-16">
         {/* Header */}
         <div
@@ -26,14 +25,14 @@ export default function TentangKamiPage() {
           data-aos-duration="200"
         >
           <h1 className="text-4xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-black">
               Tentang
             </span>{" "}
             <span className="bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent">
               Kami
             </span>
           </h1>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-600">
             Mengenal lebih dekat tentang NutriEdu dan misi kami dalam mengatasi
             malnutrisi pada bayi dan balita di Indonesia
           </p>
@@ -67,7 +66,7 @@ export default function TentangKamiPage() {
                 <li className="flex items-start gap-2">
                   <span className="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></span>
                   <span>
-                    <strong>Studi Kepala:</strong> Melambangkan pengetahuan,
+                    <strong>Kepala Bayi:</strong> Melambangkan pengetahuan,
                     edukasi, dan kecerdasan dalam mengambil keputusan untuk
                     kesehatan anak.
                   </span>
@@ -75,7 +74,7 @@ export default function TentangKamiPage() {
                 <li className="flex items-start gap-2">
                   <span className="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></span>
                   <span>
-                    <strong>Simbol Plus:</strong> Menggambarkan kesehatan dan
+                    <strong>Simbol Tambah:</strong> Menggambarkan kesehatan dan
                     perawatan medis yang menjadi fokus utama platform kami.
                   </span>
                 </li>
@@ -104,22 +103,22 @@ export default function TentangKamiPage() {
             className="text-3xl font-bold text-center mb-12"
             data-aos="slide-in-left"
           >
-            <span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">
-              Visi
-            </span>{" "}
-            <span className="text-gray-800">&</span>{" "}
-            <span className="bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent">
-              Misi
-            </span>
+            <h2
+              className="text-3xl font-bold text-center mb-12"
+              data-aos="slide-in-left"
+            >
+              <span className="text-[#0AB5E9]">Visi</span>
+              <span className="text-gray-800"> & </span>
+              <span className="text-[#00FC93]">Misi</span>
+            </h2>
           </h2>
-
           <div
             className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto"
             data-aos="slide-in-right"
           >
             <Card className="bg-white shadow-lg">
               <CardContent className="p-8">
-                <div className="w-16 h-16 bg-gradient-to-r from-cyan-400 to-green-400 rounded-full flex items-center justify-center mx-auto mb-6">
+                <div className="w-16 h-16 bg-[#00FC93] opacity rounded-full flex items-center justify-center mx-auto mb-6">
                   <Eye className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-center mb-6">Visi</h3>
@@ -133,7 +132,7 @@ export default function TentangKamiPage() {
 
             <Card className="bg-white shadow-lg">
               <CardContent className="p-8">
-                <div className="w-16 h-16 bg-gradient-to-r from-cyan-400 to-green-400 rounded-full flex items-center justify-center mx-auto mb-6">
+                <div className="w-16 h-16 bg-[#00FC93] opacity rounded-full flex items-center justify-center mx-auto mb-6">
                   <Target className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-center mb-6">Misi</h3>
@@ -173,9 +172,9 @@ export default function TentangKamiPage() {
         </div>
 
         {/* About NutriEdu */}
-        <div className="max-w-4xl mx-auto" data-aos="fade-up">
+        <div className="max-w-6xl mx-auto" data-aos="fade-up">
           <h2 className="text-3xl font-bold text-center mb-8">
-            <span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">
+            <span className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12">
               Tentang
             </span>{" "}
             <span className="bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent">
@@ -183,26 +182,12 @@ export default function TentangKamiPage() {
             </span>
           </h2>
 
-          <div className="space-y-6 text-gray-700 leading-relaxed">
+          <div className="max-w-9xl mx-auto px-4 space-y-6 text-gray-700 leading-relaxed text-justify">
             <p>
-              Nutri Edu adalah sebuah platform digital berbasis web yang
-              dikembangkan untuk membantu deteksi dini risiko malnutrisi pada
-              bayi dan ibu hamil dan tingkat. Terinspirasi dari tingginya angka
-              stunting dan malnutrisi di Indonesia serta tantangan dalam
-              pendistribusian bantuan gizi yang tepat sasaran, Nutri Edu hadir
-              sebagai solusi inovatif yang mendukung program pemerintah seperti
-              Makanan Bergizi Gratis (MBG).
+              Nutri Edu adalah sebuah platform digital berbasis web yang dikembangkan untuk membantu deteksi dini risiko malnutrisi pada bayi dan ibu hamil dan tingkat. Terinspirasi dari tingginya angka stunting dan malnutrisi di Indonesia serta tantangan dalam pendistribusian bantuan gizi yang tepat sasaran, Nutri Edu hadir sebagai solusi inovatif yang mendukung program pemerintah seperti Makanan Bergizi Gratis (MBG).
             </p>
-
             <p>
-              Menggunakan teknologi machine learning, Nutri Edu mampu
-              memprediksi risiko malnutrisi secara mandiri berdasarkan data yang
-              diinput oleh pengguna. Platform ini dirancang agar mudah diakses
-              oleh masyarakat umum, terutama keluarga yang memiliki keterbatasan
-              akses ke fasilitas kesehatan. Dengan pendekatan edukatif dan
-              praktis, Nutri Edu bertujuan meningkatkan kesadaran orang tua
-              terhadap status gizi anak serta mempercepat intervensi yang
-              dibutuhkan untuk pencegahan malnutrisi.
+              Menggunakan teknologi machine learning, Nutri Edu mampu memprediksi risiko malnutrisi secara mandiri berdasarkan data yang diinput oleh pengguna. Platform ini dirancang agar mudah diakses oleh masyarakat umum, terutama keluarga yang memiliki keterbatasan akses ke fasilitas kesehatan. Dengan pendekatan edukatif dan praktis, Nutri Edu bertujuan meningkatkan kesadaran orang tua terhadap status gizi anak serta mempercepat intervensi yang dibutuhkan untuk pencegahan malnutrisi.
             </p>
           </div>
         </div>

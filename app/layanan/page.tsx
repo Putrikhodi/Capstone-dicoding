@@ -17,7 +17,7 @@ export default function LayananPage() {
       <div className="container mx-auto px-4 py-16">
         {/* Header */}
         <div className="text-center mb-12 animate-in fade-in duration-1000">
-          <h1 className="text-4xl font-bold mb-4">
+          <h1 className="text-4xl font-bold mb-4 text-black">
             Pemeriksaan{" "}
             <span className="bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent">
               Nutrisi
@@ -154,7 +154,7 @@ export default function LayananPage() {
 
               {/* Submit Button */}
               <div className="pt-6">
-                <Button className="w-full bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white py-3 text-lg">
+                <Button className="w-full bg-gradient-to-r from-cyan-400 to-green-400 hover:from-cyan-500 rounded-md hover:to-green-500 text-white py-3 text-lg">
                   Analisa Sekarang
                 </Button>
               </div>

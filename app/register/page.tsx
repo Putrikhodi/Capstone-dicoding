@@ -48,7 +48,7 @@ export default function RegisterPage() {
 
               <div>
                 <Label htmlFor="birthplace" className="text-gray-700">
-                  Temapat TInggal
+                  Tempat Tinggal
                 </Label>
                 <Input
                   id="birthplace"
@@ -130,21 +130,23 @@ export default function RegisterPage() {
                   Agree to our{" "}
                   <Link
                     href="/terms"
-                    className="text-cyan-500 hover:text-cyan-600 underline"
+                    className="underline transition-colors duration-200 hover:bg-[#FFFFFF] hover:opacity-90 px-1"
+                    style={{ color: '#00FC93' }}
                   >
                     Terms of use
                   </Link>{" "}
                   and{" "}
                   <Link
                     href="/privacy"
-                    className="text-cyan-500 hover:text-cyan-600 underline"
+                    className="underline transition-colors duration-200 hover:bg-[#FFFFFF] hover:opacity-90 px-1"
+                    style={{ color: '#00FC93' }}
                   >
                     Privacy Policy
                   </Link>
                 </Label>
               </div>
 
-              <Button className="w-full bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white py-3">
+              <Button className="w-full bg-gradient-to-r from-cyan-400 to-green-400 hover:from-cyan-500 rounded-md hover:to-green-500 text-white py-3 text-lg">
                 Sign up
               </Button>
 
@@ -152,7 +154,8 @@ export default function RegisterPage() {
                 Already have an account?{" "}
                 <Link
                   href="/login"
-                  className="text-cyan-500 hover:text-cyan-600 underline"
+                  className="underline transition-colors duration-200 hover:bg-[#FFFFFF] hover:opacity-90 px-1"
+                  style={{ color: '#00FC93' }}
                 >
                   Log in
                 </Link>
@@ -165,14 +168,16 @@ export default function RegisterPage() {
         <div className="hidden lg:block bg-gradient-to-br from-purple-200 via-green-200 to-cyan-300 relative overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-center p-8">
             <div className="w-full h-full relative">
-              <Image
-                src="/images/width_1600.png"
-                alt="Illustration"
-                width={600}
-                height={600}
-                className="object-contain w-full h-full"
-                priority
-              />
+              <div className="w-full h-full flex items-center justify-center">
+                <Image
+                  src="/images/width_1600.png"
+                  alt="Illustration"
+                  width={500}
+                  height={500}
+                  className="object-contain w-full h-full"
+                  priority
+                />
+              </div>
             </div>
           </div>
         </div>

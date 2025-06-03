@@ -51,11 +51,10 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold mb-4">Contact Centre</h3>
             <p className="text-blue-200 mb-2">NutriEdu Organization</p>
-            <p className="text-cyan-400">app@nutriedu.com</p>
+            <p className="text-cyan-400 mb-2 duration-200 hover:underline hover:opacity-100">app@nutriedu.com</p>
           </div>
         </div>
       </div>
-
       <div className="bg-gradient-to-r from-cyan-400 to-green-400 py-4">
         <div className="container mx-auto px-4">
           <p className="text-center text-white text-sm">© Copyright 2025. All rights reserved.</p>
