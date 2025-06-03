@@ -6,13 +6,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FiLogOut } from "react-icons/fi";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/lib/auth";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isLogin, setIslogin] = useState(true)
+  const isLogin = useAuthStore((state) => state.isLoggedIn);
+  const logout = useAuthStore((state) => state.logout);
+  const login = useAuthStore((state) => state.login);
   const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) login(token);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,27 +29,30 @@ export default function Header() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleLogout = ()=>{
-    
-    setIslogin(!isLogin)
-    router.push('/')
-  }
+  const handleLogout = () => {
+    logout();
+    router.push("/");
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-    document.body.style.overflow = isMenuOpen ? 'auto' : 'hidden';
+    document.body.style.overflow = isMenuOpen ? "auto" : "hidden";
   };
 
   const closeMenu = () => {
     setIsMenuOpen(false);
-    document.body.style.overflow = 'auto';
+    document.body.style.overflow = "auto";
   };
   return (
-    <header className={`fixed w-full bg-white shadow-md transition-all duration-300 z-50 ${isScrolled ? 'py-2' : 'py-5'}`}>
+    <header
+      className={`fixed w-full bg-white shadow-md transition-all duration-300 z-50 ${
+        isScrolled ? "py-2" : "py-5"
+      }`}
+    >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 z-50">
           <Image
@@ -83,31 +94,37 @@ export default function Header() {
         </nav>
 
         {/* Desktop Buttons */}
-        {!isLogin ? (<div className="hidden md:flex items-center gap-3">
-          <Link href="/login">
-            <Button
-              variant="outline"
-              className="border-gray-300 text-gray-700 hover:bg-gray-50"
+        {!isLogin ? (
+          <div className="hidden md:flex items-center gap-3">
+            <Link href="/login">
+              <Button
+                variant="outline"
+                className="border-gray-300 text-gray-700 hover:bg-gray-50"
+              >
+                Log in
+              </Button>
+            </Link>
+            <Link href="/register">
+              <Button className="bg-gradient-to-r from-cyan-400 to-green-400 hover:from-cyan-500 hover:to-green-500 text-white">
+                Register
+              </Button>
+            </Link>
+          </div>
+        ) : (
+          <div className="hidden md:flex items-center gap-3">
+            <Link href="/profil">
+              <Image alt="icon" src="/images/icon.svg" width={39} height={39} />
+            </Link>
+
+            <button
+              onClick={handleLogout}
+              className="flex items-center space-x-2 text-[#00E240] border border-[#00E240] px-3 py-2 rounded-xl hover:text-red-800 hover:border-red-800"
             >
-              Log in
-            </Button>
-          </Link>
-          <Link href="/register">
-            <Button className="bg-gradient-to-r from-cyan-400 to-green-400 hover:from-cyan-500 hover:to-green-500 text-white">
-              Register
-            </Button>
-          </Link>
-        </div>) : (<div className="hidden md:flex items-center gap-3">
-          <Link href='/profil'><Image alt='icon' src='/images/icon.svg' width={39} height={39} /></Link>
-          
-          <button
-          onClick={handleLogout}
-            className="flex items-center space-x-2 text-[#00E240] border border-[#00E240] px-3 py-2 rounded-xl hover:text-red-800 hover:border-red-800"
-          >
-            <FiLogOut size={24} />
-            <span>Logout</span>
-          </button>
-        </div>)}
+              <FiLogOut size={24} />
+              <span>Logout</span>
+            </button>
+          </div>
+        )}
 
         {/* Mobile Menu Button */}
         <button
@@ -125,8 +142,9 @@ export default function Header() {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 bg-white z-40 transform transition-all duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          } md:hidden pt-20 px-4`}
+        className={`fixed inset-0 bg-white z-40 transform transition-all duration-300 ease-in-out ${
+          isMenuOpen ? "translate-x-0" : "translate-x-full"
+        } md:hidden pt-20 px-4`}
       >
         <nav className="flex flex-col items-center space-y-6 py-8">
           <Link

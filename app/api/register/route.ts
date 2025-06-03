@@ -4,13 +4,23 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+    const isExist = await prisma.user.findUnique({
+      where: { email: body.email },
+    });
+    if (isExist) {
+      return NextResponse.json(
+        { error: "Pengguna Sudah ada" },
+        { status: 401 }
+      );
+    }
+    console.log(body);
 
     const user = await prisma.user.create({
       data: {
         email: body.email,
         password: body.password,
         name: body.name,
-        birthDate: body.birthDate,
+        birthDate: new Date(body.birthDate),
         residence: body.residence,
       },
     });
@@ -24,12 +34,9 @@ export async function POST(request: Request) {
 
     return NextResponse.json(
       { message: "Registrasi berhasil!" },
-      { status: 200 }
+      { status: 201 }
     );
   } catch (error) {
-    return NextResponse.json(
-      { error: "Terjadi kesalahan server" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error }, { status: 500 });
   }
 }

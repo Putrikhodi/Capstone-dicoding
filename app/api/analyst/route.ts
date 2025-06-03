@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
+import { Status } from "@prisma/client";
 
 export async function GET(request: Request) {
   try {
@@ -47,8 +48,51 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { age, gender, height, weight, name } = body;
 
-    const req = await fetch("");
-    const analyst = await req.json();
+    function calculateStatus():
+      | "Normal"
+      | "Stunted"
+      | "Tinggi"
+      | "Severely Stunted" {
+      const statuses = [
+        "Normal",
+        "Stunted",
+        "Tinggi",
+        "Severely Stunted",
+      ] as const;
+      const randomIndex = Math.floor(Math.random() * statuses.length);
+      return statuses[randomIndex];
+    }
+    const analyst = calculateStatus();
+
+    // const req = await fetch("");
+    // const analyst = await req.json();
+
+    const recommendations: {
+      [key: string]: string[];
+    } = {
+      Normal: [
+        "Pertahankan pola makan sehat dan seimbang",
+        "Lanjutkan pemantauan pertumbuhan secara berkala",
+        "Pastikan anak cukup istirahat dan aktivitas fisik",
+      ],
+      Stunted: [
+        "Tingkatkan asupan protein hewani dan nabati",
+        "Konsultasikan dengan tenaga medis atau gizi",
+        "Pantau tinggi dan berat badan setiap bulan",
+      ],
+      Tinggi: [
+        "Pastikan asupan kalsium dan vitamin D cukup",
+        "Lanjutkan aktivitas fisik yang mendukung postur",
+        "Berikan nutrisi seimbang agar pertumbuhan proporsional",
+      ],
+      "Severely Stunted": [
+        "Segera konsultasikan dengan dokter anak atau ahli gizi",
+        "Berikan makanan tinggi energi dan zat gizi mikro (zat besi, zink, vitamin A)",
+        "Evaluasi kondisi medis yang mendasari secara menyeluruh",
+        "Ikuti program pemulihan gizi (jika tersedia di daerahmu)",
+      ],
+    };
+
     if (!analyst) {
       return NextResponse.json(
         { error: "Data tidak valid atau kosong" },
@@ -58,7 +102,10 @@ export async function POST(request: Request) {
 
     const token = request.headers.get("authorization")?.replace("Bearer ", "");
     if (!token) {
-      return NextResponse.json({ data: analyst }, { status: 200 });
+      return NextResponse.json({
+        status: analyst,
+        rekomendasi: recommendations[analyst],
+      });
     }
 
     const payload = jwt.verify(token, process.env.JWT_SECRET ?? "secret");
@@ -84,7 +131,7 @@ export async function POST(request: Request) {
         gender,
         name,
         age,
-        status: analyst,
+        status: analyst.toUpperCase().split(" ").join("_") as Status,
         height,
         analysisDate: new Date(),
         user: {
@@ -93,10 +140,11 @@ export async function POST(request: Request) {
       },
     });
 
-    return NextResponse.json(
-      { message: "Registrasi berhasil!" },
-      { status: 200 }
-    );
+    return NextResponse.json({
+      status: analyst,
+      rekomendasi: recommendations[analyst],
+      debug: "test",
+    });
   } catch (error) {
     return NextResponse.json(
       { error: "Terjadi kesalahan server" },

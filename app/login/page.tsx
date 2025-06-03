@@ -8,10 +8,36 @@ import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/lib/auth";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    password: "",
+    email: "",
+  });
+  const router = useRouter();
+  const login = useAuthStore((state) => state.login);
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    console.log("Data dikirim:", formData);
+
+    const res = await fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    const result = await res.json();
+    if (result.token) {
+      localStorage.setItem("token", result.token);
+      login(result.token);
+      router.push("/");
+    }
+  };
   return (
     <div className="min-h-screen bg-white">
       <div className="grid lg:grid-cols-2 min-h-[calc(100vh-0px)]">
@@ -40,7 +66,7 @@ export default function LoginPage() {
               <h1 className="text-3xl font-bold text-gray-900 mb-2">Sign in</h1>
             </div>
 
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <Label htmlFor="email" className="text-gray-700">
                   Email
@@ -49,6 +75,10 @@ export default function LoginPage() {
                   id="email"
                   type="email"
                   className="mt-1 border-gray-300 focus:border-cyan-500 focus:ring-cyan-500"
+                  onChange={(e) => {
+                    setFormData({ ...formData, email: e.target.value });
+                  }}
+                  value={formData.email}
                 />
               </div>
 
@@ -57,19 +87,16 @@ export default function LoginPage() {
                   <Label htmlFor="password" className="text-gray-700">
                     Password
                   </Label>
-                  <Link
-                    href="/forgot-password"
-                    className="underline transition-colors duration-200 hover:bg-[#FFFFFF] hover:opacity-90 px-1"
-                    style={{ color: '#00FC93' }}
-                  >
-                    Forget Password ?
-                  </Link>
                 </div>
                 <div className="relative mt-1">
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
                     className="border-gray-300 focus:border-cyan-500 focus:ring-cyan-500 pr-10"
+                    onChange={(e) => {
+                      setFormData({ ...formData, password: e.target.value });
+                    }}
+                    value={formData.password}
                   />
                   <button
                     type="button"
@@ -87,6 +114,13 @@ export default function LoginPage() {
                   Use 8 or more characters with a mix of letters, numbers &
                   symbols
                 </p>
+                <Link
+                  href="/forgot-password"
+                  className="underline transition-colors duration-200 hover:bg-[#FFFFFF] hover:opacity-90 px-1"
+                  style={{ color: "#00FC93" }}
+                >
+                  Forget Password ?
+                </Link>
               </div>
 
               <div className="flex items-center justify-between">
@@ -110,7 +144,7 @@ export default function LoginPage() {
                 <Link
                   href="/register"
                   className="underline transition-colors duration-200 hover:bg-[#FFFFFF] hover:opacity-90 px-1"
-                  style={{ color: '#00FC93' }}
+                  style={{ color: "#00FC93" }}
                 >
                   Sign up
                 </Link>

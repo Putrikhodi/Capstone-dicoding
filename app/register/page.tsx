@@ -8,11 +8,38 @@ import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    name: "",
+    birthDate: "",
+    residence: "",
+  });
+  const router = useRouter();
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    console.log("Data dikirim:", formData);
+
+    const res = await fetch("/api/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    const result = await res.json();
+    if (res.status === 201) {
+      router.push("/login");
+    } else {
+      console.error(result.error);
+    }
+  };
   return (
     <div className="min-h-screen bg-white">
       <div className="grid lg:grid-cols-2 min-h-[calc(100vh-80px)]">
@@ -23,7 +50,7 @@ export default function RegisterPage() {
               <h1 className="text-3xl font-bold text-gray-900 mb-8">Sign up</h1>
             </div>
 
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <Label htmlFor="name" className="text-gray-700">
                   Nama
@@ -32,6 +59,10 @@ export default function RegisterPage() {
                   id="name"
                   type="text"
                   className="mt-1 border-gray-300 focus:border-cyan-500 focus:ring-cyan-500"
+                  onChange={(e) => {
+                    setFormData({ ...formData, name: e.target.value });
+                  }}
+                  value={formData.name}
                 />
               </div>
 
@@ -43,6 +74,10 @@ export default function RegisterPage() {
                   id="birthdate"
                   type="date"
                   className="mt-1 border-gray-300 focus:border-cyan-500 focus:ring-cyan-500"
+                  onChange={(e) => {
+                    setFormData({ ...formData, birthDate: e.target.value });
+                  }}
+                  value={formData.birthDate}
                 />
               </div>
 
@@ -54,6 +89,10 @@ export default function RegisterPage() {
                   id="birthplace"
                   type="text"
                   className="mt-1 border-gray-300 focus:border-cyan-500 focus:ring-cyan-500"
+                  onChange={(e) => {
+                    setFormData({ ...formData, residence: e.target.value });
+                  }}
+                  value={formData.residence}
                 />
               </div>
 
@@ -65,6 +104,10 @@ export default function RegisterPage() {
                   id="email"
                   type="email"
                   className="mt-1 border-gray-300 focus:border-cyan-500 focus:ring-cyan-500"
+                  onChange={(e) => {
+                    setFormData({ ...formData, email: e.target.value });
+                  }}
+                  value={formData.email}
                 />
               </div>
 
@@ -77,6 +120,10 @@ export default function RegisterPage() {
                     id="password"
                     type={showPassword ? "text" : "password"}
                     className="border-gray-300 focus:border-cyan-500 focus:ring-cyan-500 pr-10"
+                    onChange={(e) => {
+                      setFormData({ ...formData, password: e.target.value });
+                    }}
+                    value={formData.password}
                   />
                   <button
                     type="button"
@@ -131,7 +178,7 @@ export default function RegisterPage() {
                   <Link
                     href="/terms"
                     className="underline transition-colors duration-200 hover:bg-[#FFFFFF] hover:opacity-90 px-1"
-                    style={{ color: '#00FC93' }}
+                    style={{ color: "#00FC93" }}
                   >
                     Terms of use
                   </Link>{" "}
@@ -139,7 +186,7 @@ export default function RegisterPage() {
                   <Link
                     href="/privacy"
                     className="underline transition-colors duration-200 hover:bg-[#FFFFFF] hover:opacity-90 px-1"
-                    style={{ color: '#00FC93' }}
+                    style={{ color: "#00FC93" }}
                   >
                     Privacy Policy
                   </Link>
@@ -155,7 +202,7 @@ export default function RegisterPage() {
                 <Link
                   href="/login"
                   className="underline transition-colors duration-200 hover:bg-[#FFFFFF] hover:opacity-90 px-1"
-                  style={{ color: '#00FC93' }}
+                  style={{ color: "#00FC93" }}
                 >
                   Log in
                 </Link>
