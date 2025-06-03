@@ -175,22 +175,42 @@ export default function Header() {
           >
             Kontak Kami
           </Link>
+          {!isLogin ? (
+            <div className="pt-4 flex flex-col space-y-4 w-full max-w-xs">
+              <Link href="/login" className="w-full" onClick={closeMenu}>
+                <Button
+                  variant="outline"
+                  className="w-full border-gray-300 text-gray-700 hover:bg-gray-50 py-6 text-base"
+                >
+                  Log in
+                </Button>
+              </Link>
+              <Link href="/register" className="w-full" onClick={closeMenu}>
+                <Button className="w-full bg-gradient-to-r from-cyan-400 to-green-400 hover:from-cyan-500 hover:to-green-500 text-white py-6 text-base">
+                  Register
+                </Button>
+              </Link>
+            </div>
+          ) : (
+            <div className="pt-4 flex justify-between items-center space-y-4 w-full max-w-xs">
+              <Link href="/profil">
+                <Image
+                  alt="icon"
+                  src="/images/icon.svg"
+                  width={39}
+                  height={39}
+                />
+              </Link>
 
-          <div className="pt-4 flex flex-col space-y-4 w-full max-w-xs">
-            <Link href="/login" className="w-full" onClick={closeMenu}>
-              <Button
-                variant="outline"
-                className="w-full border-gray-300 text-gray-700 hover:bg-gray-50 py-6 text-base"
+              <button
+                onClick={handleLogout}
+                className="flex items-center space-x-2 text-[#00E240] border border-[#00E240] px-3 py-2 rounded-xl hover:text-red-800 hover:border-red-800"
               >
-                Log in
-              </Button>
-            </Link>
-            <Link href="/register" className="w-full" onClick={closeMenu}>
-              <Button className="w-full bg-gradient-to-r from-cyan-400 to-green-400 hover:from-cyan-500 hover:to-green-500 text-white py-6 text-base">
-                Register
-              </Button>
-            </Link>
-          </div>
+                <FiLogOut size={24} />
+                <span>Logout</span>
+              </button>
+            </div>
+          )}
         </nav>
       </div>
     </header>
