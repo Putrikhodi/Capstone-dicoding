@@ -13,7 +13,7 @@ export function Result({ status, rekomendasi }: resultProps) {
 
   console.log({ status, rekomendasi });
 
-  const transparentColor = (hexColor: string, opacity = 0.2) => {
+  const transparentColor: any = (hexColor: string, opacity = 0.2) => {
     const r = parseInt(hexColor.slice(1, 3), 16);
     const g = parseInt(hexColor.slice(3, 5), 16);
     const b = parseInt(hexColor.slice(5, 7), 16);
