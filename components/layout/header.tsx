@@ -1,25 +1,35 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { FiLogOut } from "react-icons/fi";
+import { useRouter } from 'next/navigation';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isLogin, setIslogin] = useState(true)
+  const router = useRouter();
 
-    useEffect(() => {
-      const handleScroll = () => {
-        if (window.scrollY > 10 && !isScrolled) {
-          setIsScrolled(false);
-        }
-      };
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10 && !isScrolled) {
+        setIsScrolled(false);
+      }
+    };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleLogout = ()=>{
+    
+    setIslogin(!isLogin)
+    router.push('/')
+  }
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -73,7 +83,7 @@ export default function Header() {
         </nav>
 
         {/* Desktop Buttons */}
-        <div className="hidden md:flex items-center gap-3">
+        {!isLogin ? (<div className="hidden md:flex items-center gap-3">
           <Link href="/login">
             <Button
               variant="outline"
@@ -87,10 +97,20 @@ export default function Header() {
               Register
             </Button>
           </Link>
-        </div>
+        </div>) : (<div className="hidden md:flex items-center gap-3">
+          <Link href='/profil'><Image alt='icon' src='/images/icon.svg' width={39} height={39} /></Link>
+          
+          <button
+          onClick={handleLogout}
+            className="flex items-center space-x-2 text-[#00E240] border border-[#00E240] px-3 py-2 rounded-xl hover:text-red-800 hover:border-red-800"
+          >
+            <FiLogOut size={24} />
+            <span>Logout</span>
+          </button>
+        </div>)}
 
         {/* Mobile Menu Button */}
-        <button 
+        <button
           className="md:hidden p-2 text-gray-600 hover:text-cyan-500 focus:outline-none z-50"
           onClick={toggleMenu}
           aria-label="Toggle menu"
@@ -104,10 +124,9 @@ export default function Header() {
       </div>
 
       {/* Mobile Menu Overlay */}
-      <div 
-        className={`fixed inset-0 bg-white z-40 transform transition-all duration-300 ease-in-out ${
-          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        } md:hidden pt-20 px-4`}
+      <div
+        className={`fixed inset-0 bg-white z-40 transform transition-all duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          } md:hidden pt-20 px-4`}
       >
         <nav className="flex flex-col items-center space-y-6 py-8">
           <Link
@@ -138,7 +157,7 @@ export default function Header() {
           >
             Kontak Kami
           </Link>
-          
+
           <div className="pt-4 flex flex-col space-y-4 w-full max-w-xs">
             <Link href="/login" className="w-full" onClick={closeMenu}>
               <Button
