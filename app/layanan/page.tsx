@@ -59,12 +59,13 @@ export default function LayananPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    const token = localStorage.getItem("token") ?? "guest";
     try {
       const response = await fetch("/api/analyst", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(formData),
       });
@@ -74,15 +75,12 @@ export default function LayananPage() {
       }
 
       const data = await response.json();
-      console.log({ data });
 
       setResult({
         isActive: true,
         rekomendasi: data.rekomendasi,
         status: data.status,
       });
-
-      console.log("Submitted:", formData);
     } catch (error) {
       console.error("Failed to submit:", error);
     }

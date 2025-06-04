@@ -15,14 +15,7 @@ export async function GET(request: Request) {
 
     const payload = jwt.verify(token, process.env.JWT_SECRET ?? "secret");
 
-    if (typeof payload === "string") {
-      return NextResponse.json(
-        { error: "Invalid token payload" },
-        { status: 401 }
-      );
-    }
-
-    const userId = payload.id || payload.userId;
+    const userId = payload;
     if (!userId) {
       return NextResponse.json(
         { error: "Invalid token payload: no userId" },
@@ -30,11 +23,16 @@ export async function GET(request: Request) {
       );
     }
 
-    const analyses = await prisma.analisa.findMany({
-      where: { userId: Number(userId) },
-    });
+    const [user, analyses] = await prisma.$transaction([
+      prisma.user.findUnique({
+        where: { id: Number(userId) },
+      }),
+      prisma.analisa.findMany({
+        where: { userId: Number(userId) },
+      }),
+    ]);
 
-    return NextResponse.json({ analyses });
+    return NextResponse.json({ user, analyses });
   } catch (error) {
     return NextResponse.json(
       { error: "Unauthorized or invalid token" },
@@ -101,23 +99,23 @@ export async function POST(request: Request) {
     }
 
     const token = request.headers.get("authorization")?.replace("Bearer ", "");
-    if (!token) {
+
+    if (token == "guest") {
       return NextResponse.json({
         status: analyst,
         rekomendasi: recommendations[analyst],
       });
     }
 
-    const payload = jwt.verify(token, process.env.JWT_SECRET ?? "secret");
-
-    if (typeof payload === "string") {
+    if (typeof token !== "string") {
       return NextResponse.json(
         { error: "Invalid token payload" },
         { status: 401 }
       );
     }
+    const payload = jwt.verify(token, process.env.JWT_SECRET ?? "secret");
 
-    const userId = payload.id || payload.userId;
+    const userId = payload;
     if (!userId) {
       return NextResponse.json(
         { error: "Invalid token payload: no userId" },
@@ -125,7 +123,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const query = await prisma.analisa.create({
+    await prisma.analisa.create({
       data: {
         weight,
         gender,
@@ -135,7 +133,7 @@ export async function POST(request: Request) {
         height,
         analysisDate: new Date(),
         user: {
-          connect: { id: userId },
+          connect: { id: Number(userId) },
         },
       },
     });
@@ -149,6 +147,52 @@ export async function POST(request: Request) {
     return NextResponse.json(
       { error: "Terjadi kesalahan server" },
       { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(request: Request) {
+  try {
+    const body = await request.json();
+    const token = request.headers.get("authorization")?.replace("Bearer ", "");
+
+    if (!token) {
+      return NextResponse.json(
+        { error: "Unauthorized: No token provided" },
+        { status: 401 }
+      );
+    }
+
+    const payload = jwt.verify(token, process.env.JWT_SECRET ?? "secret");
+
+    const userId = payload;
+    if (!userId) {
+      return NextResponse.json(
+        { error: "Invalid token payload: no userId" },
+        { status: 401 }
+      );
+    }
+
+    await prisma.analisa.delete({
+      where: {
+        id: body.id,
+      },
+    });
+
+    const [user, analyses] = await prisma.$transaction([
+      prisma.user.findUnique({
+        where: { id: Number(userId) },
+      }),
+      prisma.analisa.findMany({
+        where: { userId: Number(userId) },
+      }),
+    ]);
+
+    return NextResponse.json({ user, analyses });
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Unauthorized or invalid token" },
+      { status: 401 }
     );
   }
 }

@@ -103,14 +103,14 @@ export default function TentangKamiPage() {
             className="text-3xl font-bold text-center mb-12"
             data-aos="slide-in-left"
           >
-            <h2
+            <div
               className="text-3xl font-bold text-center mb-12"
               data-aos="slide-in-left"
             >
               <span className="text-[#0AB5E9]">Visi</span>
               <span className="text-gray-800"> & </span>
               <span className="text-[#00FC93]">Misi</span>
-            </h2>
+            </div>
           </h2>
           <div
             className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto"
@@ -184,10 +184,23 @@ export default function TentangKamiPage() {
 
           <div className="max-w-9xl mx-auto px-4 space-y-6 text-gray-700 leading-relaxed text-justify">
             <p>
-              Nutri Edu adalah sebuah platform digital berbasis web yang dikembangkan untuk membantu deteksi dini risiko malnutrisi pada bayi dan ibu hamil dan tingkat. Terinspirasi dari tingginya angka stunting dan malnutrisi di Indonesia serta tantangan dalam pendistribusian bantuan gizi yang tepat sasaran, Nutri Edu hadir sebagai solusi inovatif yang mendukung program pemerintah seperti Makanan Bergizi Gratis (MBG).
+              Nutri Edu adalah sebuah platform digital berbasis web yang
+              dikembangkan untuk membantu deteksi dini risiko malnutrisi pada
+              bayi dan ibu hamil dan tingkat. Terinspirasi dari tingginya angka
+              stunting dan malnutrisi di Indonesia serta tantangan dalam
+              pendistribusian bantuan gizi yang tepat sasaran, Nutri Edu hadir
+              sebagai solusi inovatif yang mendukung program pemerintah seperti
+              Makanan Bergizi Gratis (MBG).
             </p>
             <p>
-              Menggunakan teknologi machine learning, Nutri Edu mampu memprediksi risiko malnutrisi secara mandiri berdasarkan data yang diinput oleh pengguna. Platform ini dirancang agar mudah diakses oleh masyarakat umum, terutama keluarga yang memiliki keterbatasan akses ke fasilitas kesehatan. Dengan pendekatan edukatif dan praktis, Nutri Edu bertujuan meningkatkan kesadaran orang tua terhadap status gizi anak serta mempercepat intervensi yang dibutuhkan untuk pencegahan malnutrisi.
+              Menggunakan teknologi machine learning, Nutri Edu mampu
+              memprediksi risiko malnutrisi secara mandiri berdasarkan data yang
+              diinput oleh pengguna. Platform ini dirancang agar mudah diakses
+              oleh masyarakat umum, terutama keluarga yang memiliki keterbatasan
+              akses ke fasilitas kesehatan. Dengan pendekatan edukatif dan
+              praktis, Nutri Edu bertujuan meningkatkan kesadaran orang tua
+              terhadap status gizi anak serta mempercepat intervensi yang
+              dibutuhkan untuk pencegahan malnutrisi.
             </p>
           </div>
         </div>
