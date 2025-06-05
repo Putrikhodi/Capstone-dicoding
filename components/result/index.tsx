@@ -1,14 +1,14 @@
 export type resultProps = {
-  status: "Normal" | "Stunted" | "Tinggi" | "Severely Stunted";
+  status: "normal" | "stunting" | "tinggi" | "severely stunting";
   rekomendasi: string[];
 };
 
 export function Result({ status, rekomendasi }: resultProps) {
   const color = {
-    Normal: "#0FB200",
-    Stunted: "#40c0f3",
-    Tinggi: "#d88e47",
-    "Severely Stunted": "#ff5355",
+    normal: "#0FB200",
+    stunting: "#40c0f3",
+    tinggi: "#d88e47",
+    "severely stunting": "#ff5355",
   };
 
   console.log({ status, rekomendasi });

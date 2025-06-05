@@ -42,113 +42,109 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  try {
-    const body = await request.json();
-    const { age, gender, height, weight, name } = body;
+  const body = await request.json();
+  const { age, gender, height, weight, name } = body;
+  console.log({ age, gender, height, weight, name });
 
-    function calculateStatus():
-      | "Normal"
-      | "Stunted"
-      | "Tinggi"
-      | "Severely Stunted" {
-      const statuses = [
-        "Normal",
-        "Stunted",
-        "Tinggi",
-        "Severely Stunted",
-      ] as const;
-      const randomIndex = Math.floor(Math.random() * statuses.length);
-      return statuses[randomIndex];
-    }
-    const analyst = calculateStatus();
-
-    // const req = await fetch("");
-    // const analyst = await req.json();
-
-    const recommendations: {
-      [key: string]: string[];
-    } = {
-      Normal: [
-        "Pertahankan pola makan sehat dan seimbang",
-        "Lanjutkan pemantauan pertumbuhan secara berkala",
-        "Pastikan anak cukup istirahat dan aktivitas fisik",
-      ],
-      Stunted: [
-        "Tingkatkan asupan protein hewani dan nabati",
-        "Konsultasikan dengan tenaga medis atau gizi",
-        "Pantau tinggi dan berat badan setiap bulan",
-      ],
-      Tinggi: [
-        "Pastikan asupan kalsium dan vitamin D cukup",
-        "Lanjutkan aktivitas fisik yang mendukung postur",
-        "Berikan nutrisi seimbang agar pertumbuhan proporsional",
-      ],
-      "Severely Stunted": [
-        "Segera konsultasikan dengan dokter anak atau ahli gizi",
-        "Berikan makanan tinggi energi dan zat gizi mikro (zat besi, zink, vitamin A)",
-        "Evaluasi kondisi medis yang mendasari secara menyeluruh",
-        "Ikuti program pemulihan gizi (jika tersedia di daerahmu)",
-      ],
-    };
-
-    if (!analyst) {
-      return NextResponse.json(
-        { error: "Data tidak valid atau kosong" },
-        { status: 401 }
-      );
-    }
-
-    const token = request.headers.get("authorization")?.replace("Bearer ", "");
-
-    if (token == "guest") {
-      return NextResponse.json({
-        status: analyst,
-        rekomendasi: recommendations[analyst],
-      });
-    }
-
-    if (typeof token !== "string") {
-      return NextResponse.json(
-        { error: "Invalid token payload" },
-        { status: 401 }
-      );
-    }
-    const payload = jwt.verify(token, process.env.JWT_SECRET ?? "secret");
-
-    const userId = payload;
-    if (!userId) {
-      return NextResponse.json(
-        { error: "Invalid token payload: no userId" },
-        { status: 401 }
-      );
-    }
-
-    await prisma.analisa.create({
-      data: {
-        weight,
-        gender,
-        name,
-        age,
-        status: analyst.toUpperCase().split(" ").join("_") as Status,
-        height,
-        analysisDate: new Date(),
-        user: {
-          connect: { id: Number(userId) },
-        },
+  const req = await fetch(
+    "https://web-production-09e20.up.railway.app/predict",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    });
+      body: JSON.stringify({
+        umur: age,
+        tinggi: height,
+        jenis_kelamin: gender,
+      }),
+    }
+  );
 
+  const res = await req.json();
+  console.log({ res });
+  const analyst = res.status_gizi;
+
+  const recommendations: {
+    [key: string]: string[];
+  } = {
+    normal: [
+      "Pertahankan pola makan sehat dan seimbang",
+      "Lanjutkan pemantauan pertumbuhan secara berkala",
+      "Pastikan anak cukup istirahat dan aktivitas fisik",
+    ],
+    stunting: [
+      "Tingkatkan asupan protein hewani dan nabati",
+      "Konsultasikan dengan tenaga medis atau gizi",
+      "Pantau tinggi dan berat badan setiap bulan",
+    ],
+    tinggi: [
+      "Pastikan asupan kalsium dan vitamin D cukup",
+      "Lanjutkan aktivitas fisik yang mendukung postur",
+      "Berikan nutrisi seimbang agar pertumbuhan proporsional",
+    ],
+    "severely stunting": [
+      "Segera konsultasikan dengan dokter anak atau ahli gizi",
+      "Berikan makanan tinggi energi dan zat gizi mikro (zat besi, zink, vitamin A)",
+      "Evaluasi kondisi medis yang mendasari secara menyeluruh",
+      "Ikuti program pemulihan gizi (jika tersedia di daerahmu)",
+    ],
+  };
+  console.log(recommendations[analyst]);
+
+  if (!analyst) {
+    return NextResponse.json(
+      { error: "Data tidak valid atau kosong" },
+      { status: 401 }
+    );
+  }
+
+  const token = request.headers.get("authorization")?.replace("Bearer ", "");
+  console.log(token);
+
+  if (token == "guest") {
     return NextResponse.json({
       status: analyst,
       rekomendasi: recommendations[analyst],
-      debug: "test",
     });
-  } catch (error) {
+  }
+
+  if (typeof token !== "string") {
     return NextResponse.json(
-      { error: "Terjadi kesalahan server" },
-      { status: 500 }
+      { error: "Invalid token payload" },
+      { status: 401 }
     );
   }
+  const payload = jwt.verify(token, process.env.JWT_SECRET ?? "secret");
+
+  const userId = payload;
+  if (!userId) {
+    return NextResponse.json(
+      { error: "Invalid token payload: no userId" },
+      { status: 401 }
+    );
+  }
+
+  await prisma.analisa.create({
+    data: {
+      weight,
+      gender,
+      name,
+      age,
+      status: analyst.split(" ").join("_") as Status,
+      height,
+      analysisDate: new Date(),
+      user: {
+        connect: { id: Number(userId) },
+      },
+    },
+  });
+
+  return NextResponse.json({
+    status: analyst,
+    rekomendasi: recommendations[analyst],
+    debug: "test",
+  });
 }
 
 export async function DELETE(request: Request) {

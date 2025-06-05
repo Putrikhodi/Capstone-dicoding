@@ -18,13 +18,13 @@ import { Result } from "@/components/result";
 type FormData = {
   name: string;
   age: number;
-  gender: "male" | "female";
+  gender: "laki-laki" | "perempuan";
   height: number;
   weight: number;
 };
 
 type Result = {
-  status: "Normal" | "Stunted" | "Tinggi" | "Severely Stunted";
+  status: "normal" | "stunting" | "tinggi" | "severely stunting";
   rekomendasi: string[];
   isActive: boolean;
 };
@@ -33,7 +33,7 @@ export default function LayananPage() {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     age: 0,
-    gender: "male",
+    gender: "laki-laki",
     height: 0,
     weight: 0,
   });
@@ -41,7 +41,7 @@ export default function LayananPage() {
   const [result, setResult] = useState<Result>({
     isActive: false,
     rekomendasi: [],
-    status: "Normal",
+    status: "normal",
   });
 
   const handleChange = (
@@ -70,11 +70,8 @@ export default function LayananPage() {
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) {
-        throw new Error(`Server error: ${response.status}`);
-      }
-
       const data = await response.json();
+      console.log({ data });
 
       setResult({
         isActive: true,
@@ -169,7 +166,7 @@ export default function LayananPage() {
                           onValueChange={(value) =>
                             setFormData({
                               ...formData,
-                              gender: value as "male" | "female",
+                              gender: value as "laki-laki" | "perempuan",
                             })
                           }
                         >
@@ -177,8 +174,8 @@ export default function LayananPage() {
                             <SelectValue placeholder="Pilih Gender" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="male">Laki-laki</SelectItem>
-                            <SelectItem value="female">Perempuan</SelectItem>
+                            <SelectItem value="laki-laki">Laki-laki</SelectItem>
+                            <SelectItem value="perempuan">Perempuan</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>

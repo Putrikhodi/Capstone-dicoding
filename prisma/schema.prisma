@@ -37,9 +37,9 @@ model Analisa {
 
 
 enum Status {
-  NORMAL
-  STUNTED
-  TINGGI
-  SEVERELY_STUNTED
+  normal
+  stunting
+  tinggi
+  severely_stunting
 }
  
